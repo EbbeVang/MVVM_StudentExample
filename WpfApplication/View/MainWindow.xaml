@@ -3,7 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="249" Margin="30,50,0,0" VerticalAlignment="Top" Width="211"/>
+        <ListBox ItemsSource="{Binding StudentList}" HorizontalAlignment="Left" Height="249" Margin="30,50,0,0" VerticalAlignment="Top" Width="211"/>
+        <Label Content="{Binding CurrentStudent.FirstName}" HorizontalAlignment="Left" Margin="328,66,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding CurrentStudent.LastName}" HorizontalAlignment="Left" Margin="328,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,2.308"/>
+        <Label Content="{Binding CurrentStudent.ClassName}" HorizontalAlignment="Left" Margin="328,128,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding CurrentStudent.ExamGroup}" HorizontalAlignment="Left" Margin="328,159,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -30,13 +30,13 @@ namespace WpfApplication.ViewModel
         }
 
 
-        public Model.Student CurrentCurrentStudent {
+        public Model.Student CurrentStudent {
             get { return _currentStudent; }
             set
             {
                 _currentStudent = value;
                 // tell MVVM that CurrentCurrentStudent property changed...
-                OnPropertyChanged("CurrentCurrentStudent");
+                OnPropertyChanged("CurrentStudent");
             }
         }
 

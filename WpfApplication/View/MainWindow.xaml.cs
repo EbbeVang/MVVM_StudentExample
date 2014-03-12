@@ -25,8 +25,10 @@ namespace WpfApplication
 
         public MainWindow()
         {
+            
             InitializeComponent();
             DataContext = dataContext;
+            
         }
     }
 }
