@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using WpfApplication.Annotations;
 
@@ -17,9 +19,14 @@ namespace WpfApplication.ViewModel
 
         private List<Model.Student> _studentList; 
 
+        private ICommand _addStudent;
+
         // ctor with fake data
         public Student()
         {
+            // Create command instance - use RealyCommand to call AddContact method
+            _addStudent = new RelayCommand(AddStudentCommand){IsEnabled = true};
+            
             _studentList = new List<Model.Student>();
             _studentList.Add(new Model.Student(){FirstName = "Liv", LastName = "Vang", ExamGroup = "None"});
             _studentList.Add(new Model.Student(){FirstName = "Mikkel", LastName = "vang", ExamGroup = "Lazy"});
@@ -29,7 +36,10 @@ namespace WpfApplication.ViewModel
             _currentStudent = _studentList[0];
         }
 
-
+        // expose commmand to UI
+        public ICommand AddStudent {
+            get { return _addStudent; }
+        }
         public Model.Student CurrentStudent {
             get { return _currentStudent; }
             set
@@ -53,7 +63,15 @@ namespace WpfApplication.ViewModel
             }
         }
 
-        
+
+        private void AddStudentCommand()
+        {
+            // create Student in StudentList
+            _studentList.Add(new Model.Student(){FirstName = "Commands are great"});
+            // notify Changes in StudentList
+            OnPropertyChanged("StudentList");
+        }
+
 
         #region Implementation of inotify.. interface
         public event PropertyChangedEventHandler PropertyChanged;
