@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,13 +12,29 @@ namespace WpfApplication.ViewModel
 {
     class Student : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private Model.Student _student;
 
+        public Model.Student CurrentStudent {
+            get { return _student; }
+            set
+            {
+                _student = value;
+                // tell MVVM that CurrentStudent property changed...
+                OnPropertyChanged("CurrentStudent");
+            }
+        }
+
+        public ObservableCollection<Model.Student> StudentList { get; set; }
+
+        #region Implementation of inotify.. interface
+        public event PropertyChangedEventHandler PropertyChanged;
+        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }
