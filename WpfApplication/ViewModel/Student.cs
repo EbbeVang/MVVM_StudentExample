@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using WpfApplication.Annotations;
 
 namespace WpfApplication.ViewModel
@@ -14,7 +15,20 @@ namespace WpfApplication.ViewModel
     {
         private Model.Student _currentStudent;
 
-        private List<Model.Student> _studentList 
+        private List<Model.Student> _studentList; 
+
+        // ctor with fake data
+        public Student()
+        {
+            _studentList = new List<Model.Student>();
+            _studentList.Add(new Model.Student(){FirstName = "Liv", LastName = "Vang", ExamGroup = "None"});
+            _studentList.Add(new Model.Student(){FirstName = "Mikkel", LastName = "vang", ExamGroup = "Lazy"});
+            _studentList.Add(new Model.Student() { FirstName = "Ebbe", LastName = "Vang", ExamGroup = "Winners" });
+            _studentList.Sort();
+
+            _currentStudent = _studentList[0];
+        }
+
 
         public Model.Student CurrentCurrentStudent {
             get { return _currentStudent; }
@@ -27,7 +41,19 @@ namespace WpfApplication.ViewModel
         }
 
         //always use obeservable collection when collection is needed
-        public ObservableCollection<Model.Student> StudentList { get; set; }
+        public ObservableCollection<Model.Student> StudentList {
+            get
+            {
+                ObservableCollection<Model.Student> c = new ObservableCollection<Model.Student>();
+                foreach (var student in _studentList)
+                {
+                    c.Add(student);
+                }
+                return c;
+            }
+        }
+
+        
 
         #region Implementation of inotify.. interface
         public event PropertyChangedEventHandler PropertyChanged;

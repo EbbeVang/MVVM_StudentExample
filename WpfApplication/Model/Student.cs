@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApplication.Model
 {
-    class Student
+    class Student : IComparable<Model.Student>
     {
         public String FirstName { get; set; }
 
@@ -16,5 +16,11 @@ namespace WpfApplication.Model
 
         public String ExamGroup { get; set; }
 
+
+        public int CompareTo(Student other)
+        {
+            // sort by firstname - easy 
+            return FirstName.CompareTo(other.FirstName);
+        }
     }
 }
