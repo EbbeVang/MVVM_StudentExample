@@ -12,18 +12,21 @@ namespace WpfApplication.ViewModel
 {
     class Student : INotifyPropertyChanged
     {
-        private Model.Student _student;
+        private Model.Student _currentStudent;
 
-        public Model.Student CurrentStudent {
-            get { return _student; }
+        private List<Model.Student> _studentList 
+
+        public Model.Student CurrentCurrentStudent {
+            get { return _currentStudent; }
             set
             {
-                _student = value;
-                // tell MVVM that CurrentStudent property changed...
-                OnPropertyChanged("CurrentStudent");
+                _currentStudent = value;
+                // tell MVVM that CurrentCurrentStudent property changed...
+                OnPropertyChanged("CurrentCurrentStudent");
             }
         }
 
+        //always use obeservable collection when collection is needed
         public ObservableCollection<Model.Student> StudentList { get; set; }
 
         #region Implementation of inotify.. interface
